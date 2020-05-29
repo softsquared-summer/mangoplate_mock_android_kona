@@ -1,7 +1,11 @@
 package com.softsquared.template.src.main;
 
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
 
@@ -11,6 +15,8 @@ import com.softsquared.template.src.BaseActivity;
 import com.softsquared.template.src.main.interfaces.MainActivityView;
 import com.softsquared.template.src.main.models.UserInfo;
 import com.softsquared.template.src.main.search_restaurant.SearchRestaurantFragment;
+
+import java.security.MessageDigest;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -40,7 +46,6 @@ public class MainActivity extends BaseActivity implements MainActivityView {
 
         mBottomNavigationView();
 
-        mainService.getMyInfo();
     }
 
     public void mBottomNavigationView()

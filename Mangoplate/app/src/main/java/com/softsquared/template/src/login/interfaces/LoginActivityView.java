@@ -1,8 +1,10 @@
 package com.softsquared.template.src.login.interfaces;
 
+import com.softsquared.template.src.login.models.LoginInfo;
+
 public interface LoginActivityView {
 
-    void validateSuccess(String text);
+    void LoginSuccess(LoginInfo loginInfo);
 
-    void validateFailure(String message);
+    void LoginFailure(String message);
 }

@@ -4,12 +4,18 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.kakao.auth.ApprovalType;
+import com.kakao.auth.AuthType;
+import com.kakao.auth.IApplicationConfig;
+import com.kakao.auth.ISessionConfig;
+import com.kakao.auth.KakaoAdapter;
 import com.softsquared.template.config.XAccessTokenInterceptor;
 
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
+import androidx.annotation.Nullable;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -68,4 +74,62 @@ public class ApplicationClass extends Application {
 
         return retrofit;
     }
+
+    private static volatile ApplicationClass instance = null;
+
+    private static class KakaoSDKAdpater extends KakaoAdapter {
+
+        public ISessionConfig getSessionConfig()
+        {
+            return new ISessionConfig() {
+                @Override
+                public AuthType[] getAuthTypes() {
+                    return new AuthType[]{AuthType.KAKAO_LOGIN_ALL};
+                }
+
+                @Override
+                public boolean isUsingWebviewTimer() {
+                    return false;
+                }
+
+                @Override
+                public boolean isSecureMode() {
+                    return false;
+                }
+
+                @Nullable
+                @Override
+                public ApprovalType getApprovalType() {
+                    return ApprovalType.INDIVIDUAL;
+                }
+
+                @Override
+                public boolean isSaveFormData() {
+                    return true;
+                }
+            };
+        }
+
+        @Override
+        public IApplicationConfig getApplicationConfig() {
+            return new IApplicationConfig() {
+                @Override
+                public Context getApplicationContext() {
+                    return ApplicationClass.getGlobalApplicationContext();
+                }
+            };
+        }
+
+    }
+
+
+    public static ApplicationClass getGlobalApplicationContext()
+    {
+        if(instance == null)
+        {
+            throw new IllegalStateException("this application does not inherit com.kakao.GlobalApplication");
+        }
+        return instance;
+    }
+
 }

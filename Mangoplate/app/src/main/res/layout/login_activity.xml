@@ -44,17 +44,24 @@
         app:layout_constraintBottom_toTopOf="@id/login_textView"
         android:layout_marginStart="25dp"
         android:src="@drawable/logo_textview_whitedot"/>
-    <ImageView
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/login_facebook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/login_facebook_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+    <ImageButton
         android:id="@+id/login_facebook_btn"
         android:layout_width="210dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/login_textView"
         android:layout_marginTop="50dp"
-        android:src="@drawable/login_facebook_btn"/>
+        android:background="@drawable/login_facebook_btn"/>
     <ImageView
         android:id="@+id/login_kakaotalk_btn"
         android:layout_width="210dp"
@@ -66,6 +73,19 @@
         app:layout_constraintTop_toBottomOf="@id/login_facebook_btn"
         android:layout_marginTop="10dp"
         android:src="@drawable/login_kakaotalk_btn"/>
+
+    <ImageView
+        android:id="@+id/login_email_btn"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/login_kakaotalk_btn"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/login_kakaotalk_btn"/>
+
     <TextView
         android:id="@+id/login_skip"
         android:layout_width="wrap_content"
