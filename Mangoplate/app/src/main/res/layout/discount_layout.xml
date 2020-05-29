@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white">
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/discount_tablayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:tabGravity="fill"
+        app:tabTextColor="@color/colorLightGray"
+        app:tabSelectedTextColor="@color/orange_red"
+        app:tabIndicatorColor="@color/orange_red"
+        android:background="?attr/selectableItemBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/discount_tablayout_eatdeal_tab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="EAT딜"/>
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/discount_tablayout_mangopick_tab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="망고픽스토리"/>
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/discount_tablayout_toplist_tab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TOP리스트"/>
+    </com.google.android.material.tabs.TabLayout>
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/discount_viewpager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/discount_tablayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
