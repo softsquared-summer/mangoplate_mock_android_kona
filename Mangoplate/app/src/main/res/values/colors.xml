@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
@@ -9,6 +10,8 @@
     <color name="colorHexGray">#F2F2F2</color>
     <color name="colorLightGray">#DBDBDB</color>
     <color name="colorGold">#FFD700</color>
+    <color name="myPageBlack">#4F4F4F</color>
+
 
 
 <!--    from https://gist.github.com/sghael/2930380-->
@@ -38,7 +41,7 @@
     <color name="coral">#FF7F50</color>
     <color name="hot_pink">#FF69B4</color>
     <color name="tomato">#FF6347</color>
-    <color name="orange_red">#FF4500</color>
+    <color name="orange_red">#FF7101</color>
     <color name="deep_pink">#FF1493</color>
     <color name="fuchsia">#FF00FF</color>
     <color name="magenta">#FF00FF</color>

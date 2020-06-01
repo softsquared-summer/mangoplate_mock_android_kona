@@ -1,5 +1,6 @@
 package com.softsquared.template.src.main;
 
+import com.softsquared.template.src.main.announcement.AnnouncementFragment;
 import com.softsquared.template.src.main.discount.DiscountFragment;
 import com.softsquared.template.src.main.mypage.MypageFragment;
 import com.softsquared.template.src.main.search_restaurant.SearchRestaurantFragment;
@@ -33,10 +34,10 @@ public class MainContentsAdapter extends FragmentStatePagerAdapter {
             case 1:
                 DiscountFragment discountFragment = new DiscountFragment();
                 return discountFragment;
-//            case 2:
-//                NoticeFragment noticeFragment = new NoticeFragment();
-//                return noticeFragment;
-//
+            case 2:
+                AnnouncementFragment  announcementFragment= new AnnouncementFragment();
+                return announcementFragment;
+
             case 3:
                 MypageFragment mypageFragment = new MypageFragment();
                 return mypageFragment;

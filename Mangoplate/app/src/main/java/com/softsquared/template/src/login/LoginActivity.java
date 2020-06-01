@@ -1,6 +1,7 @@
 package com.softsquared.template.src.login;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
@@ -34,6 +35,7 @@ public class LoginActivity extends BaseActivity implements LoginActivityView {
     private CallbackManager callbackManager;
     LoginService loginService;
     AccessToken accessToken;
+    private ImageView loginBackgoundImage;
 
 
     @Override
@@ -41,6 +43,10 @@ public class LoginActivity extends BaseActivity implements LoginActivityView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
         loginService = new LoginService(this);
+
+        loginBackgoundImage = findViewById(R.id.login_background_img);
+        loginBackgoundImage.setColorFilter(getResources().getColor(R.color.colorHexGray), PorterDuff.Mode.MULTIPLY);
+
 
         FacebookLogin();
     }

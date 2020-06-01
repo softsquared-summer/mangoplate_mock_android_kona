@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.amar.library.ui.StickyScrollView;
 import com.amar.library.ui.interfaces.IScrollViewListener;
+import com.google.android.material.bottomnavigation.BottomNavigationMenu;
 import com.softsquared.template.R;
 import com.softsquared.template.src.BaseActivity;
 import com.softsquared.template.src.main.restaurant_detail.interfaces.RestaurantDetailActivityView;
@@ -26,6 +27,7 @@ public class RestaurantDetailActivity extends BaseActivity implements Restaurant
     final private RestaurantDetailService restaurantDetailService = new RestaurantDetailService(this, this);
     private RestaurantDetailTopPhotoAdapter restaurantDetailTopPhotoAdapter;
     private RestaurantDetailMenuAdapter restaurantDetailMenuAdapter;
+
     private StickyScrollView stickyScrollView;
     private int restaurantId;
 

@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
@@ -10,27 +11,188 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation_view"
+    <it.sephiroth.android.library.viewrevealanimator.ViewRevealAnimator
+        android:layout_centerHorizontal="true"
+        android:id="@+id/animator"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_gravity="bottom"
-        android:background="@color/colorWhite"
-        app:menu="@menu/bottom_navigation_menu"
-        android:elevation="10sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:itemBackground="@color/colorWhite"
-        app:labelVisibilityMode="labeled">
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/middle_floating_action_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scaleType="fitXY"
-            android:layout_gravity="bottom|center"
-            android:elevation="0dp"
-            android:src="@drawable/middle_floating_button"
-            app:fabSize="mini"
-            android:layout_marginBottom="10dp"/>
-    </com.google.android.material.bottomnavigation.BottomNavigationView>
+        android:layout_height="match_parent"
+        android:animationDuration="@android:integer/config_longAnimTime"
+        app:vra_hideBeforeReveal="true"
+        android:measureAllChildren="true"
+        android:animateFirstView="true"
+        android:outAnimation="@anim/tap_out_animation"
+        android:inAnimation="@anim/tap_in_animation"
+        android:interpolator="@android:interpolator/accelerate_decelerate">
+
+<!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent">-->
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottom_navigation_view"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_gravity="bottom"
+                android:background="@color/colorWhite"
+                app:menu="@menu/bottom_navigation_menu"
+                android:elevation="10sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:itemBackground="@color/colorWhite"
+                app:itemIconTint="@color/bottomnavigiation_select"
+                app:itemTextColor="@color/bottomnavigiation_select"
+                app:labelVisibilityMode="labeled">
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/middle_floating_action_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitXY"
+                    android:layout_gravity="bottom|center"
+                    android:elevation="0dp"
+                    android:src="@drawable/middle_floating_button"
+                    app:fabSize="mini"
+                    android:layout_marginBottom="10dp"/>
+            </com.google.android.material.bottomnavigation.BottomNavigationView>
+<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/orange_red">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/float_register_restaurant_const"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginStart="30dp"
+                android:layout_marginBottom="100dp">
+                <ImageView
+                    android:id="@+id/float_register_restaurant_img"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/float_register_restaurant"
+                    android:adjustViewBounds="true"/>
+                <TextView
+                    android:id="@+id/float_register_restaurant_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@id/float_register_restaurant_img"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginStart="20dp"
+                    android:text="식당 등록하기"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/float_write_review_const"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/float_register_restaurant_const"
+                app:layout_constraintBottom_toTopOf="@id/float_register_restaurant_const"
+                android:layout_marginBottom="30dp">
+                <ImageView
+                    android:id="@+id/float_write_review_img"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/float_go_to_review"
+                    android:adjustViewBounds="true"/>
+                <TextView
+                    android:id="@+id/float_write_review_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@id/float_write_review_img"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginStart="20dp"
+                    android:text="리뷰 쓰기"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/float_gone_const"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/float_register_restaurant_const"
+                app:layout_constraintBottom_toTopOf="@id/float_write_review_const"
+                android:layout_marginBottom="30dp">
+                <ImageView
+                    android:id="@+id/float_gone_img"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/float_gone"
+                    android:adjustViewBounds="true"/>
+                <TextView
+                    android:id="@+id/float_gone_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@id/float_gone_img"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginStart="20dp"
+                    android:text="가봤어요"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/float_go_to_eatdeal_const"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/float_register_restaurant_const"
+                app:layout_constraintBottom_toTopOf="@id/float_gone_const"
+                android:layout_marginBottom="30dp">
+                <ImageView
+                    android:id="@+id/float_go_to_eatdeal_img"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/float_go_to_eatdeal"
+                    android:adjustViewBounds="true"/>
+                <TextView
+                    android:id="@+id/float_go_to_eatdeal_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@id/float_go_to_eatdeal_img"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginStart="20dp"
+                    android:text="EAT딜 보러가기"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/middle_floating_action_close_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:elevation="0dp"
+                android:src="@drawable/float_close_btn"
+                app:fabSize="mini"
+                android:layout_marginBottom="5dp"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </it.sephiroth.android.library.viewrevealanimator.ViewRevealAnimator>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+

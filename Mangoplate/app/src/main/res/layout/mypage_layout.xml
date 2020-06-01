@@ -15,26 +15,28 @@
             android:gravity="end"
             android:background="@color/colorWhite">
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginEnd="20dp"
+
                 android:scaleType="fitXY"
+                android:background="?attr/selectableItemBackground"
                 android:src="@drawable/bell_img"/>
         </LinearLayout>
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="100dp"
             android:background="@color/colorWhite">
 
-            <ImageView
+            <com.mikhaellopez.circularimageview.CircularImageView
                 android:id="@+id/mypage_profile"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:scaleType="fitXY"
+
                 android:src="@drawable/profile_thumbnail"
                 android:layout_marginStart="10dp"/>
             <TextView
@@ -43,18 +45,17 @@
                 android:layout_height="wrap_content"
                 android:text="0"
                 android:layout_marginStart="40dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="30dp"
                 app:layout_constraintStart_toEndOf="@id/mypage_profile"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/follower_textView"
-                android:layout_marginBottom="5dp"
                 android:textSize="14sp"/>
             <TextView
                 android:id="@+id/follower_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="팔로워"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="10dp"
                 app:layout_constraintStart_toEndOf="@id/mypage_profile"
                 app:layout_constraintTop_toBottomOf="@id/follower_number"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -74,36 +75,33 @@
                 android:layout_height="wrap_content"
                 android:text="0"
                 android:layout_marginStart="25dp"
-                android:layout_marginTop="20dp"
                 app:layout_constraintStart_toEndOf="@id/mypage_divider"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/follower_textView"
-                android:layout_marginBottom="5dp"
+                app:layout_constraintTop_toTopOf="@id/follower_number"
+                app:layout_constraintBottom_toBottomOf="@id/follower_number"
                 android:textSize="14sp"/>
             <TextView
                 android:id="@+id/following_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="팔로워"
-                android:layout_marginBottom="15dp"
                 app:layout_constraintStart_toEndOf="@id/mypage_divider"
-                app:layout_constraintTop_toBottomOf="@id/follower_number"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="@id/follower_textView"
+                app:layout_constraintBottom_toBottomOf="@id/follower_textView"
                 android:layout_marginStart="10dp"/>
             <ImageView
                 android:id="@+id/profile_update_btn"
-                android:layout_width="60dp"
+                android:layout_width="70dp"
                 android:layout_height="40dp"
                 android:src="@drawable/profile_update"
                 android:scaleType="fitXY"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="@id/follower_number"
+                app:layout_constraintBottom_toBottomOf="@id/follower_textView"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="15dp"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="45dp"
             android:background="@color/colorWhite"
             android:elevation="0dp"
             android:orientation="horizontal">
@@ -118,15 +116,19 @@
         </LinearLayout>
         <View
             android:layout_width="match_parent"
-            android:layout_height="15dp"/>
+            android:layout_height="0.5dp"
+            android:background="@color/colorLightGray"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="11dp"/>
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="@color/colorWhite">
             <ImageView
                 android:id="@+id/event_img"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:src="@drawable/event_box_img"
                 android:scaleType="fitXY"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -139,32 +141,32 @@
                 android:layout_height="wrap_content"
                 android:text="이벤트"
                 android:textSize="18sp"
+                android:textColor="@color/myPageBlack"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/event_img"
-                android:layout_marginStart="10dp"
-                android:textStyle="bold"/>
+                android:layout_marginStart="10dp" />
             <ImageView
                 android:id="@+id/event_arrow"
-                android:layout_width="20dp"
-                android:layout_height="35dp"
+                android:layout_width="13dp"
+                android:layout_height="wrap_content"
                 android:src="@drawable/arrow_btn"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="@id/event_img"
+                app:layout_constraintBottom_toBottomOf="@id/event_img"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="20dp"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
         <View
             android:layout_width="match_parent"
-            android:layout_height="15dp"/>
+            android:layout_height="11dp"/>
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="@color/colorWhite">
             <ImageView
                 android:id="@+id/purchased_eatdeal"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
                 android:src="@drawable/purchased_eat_deal"
                 android:scaleType="fitXY"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -176,19 +178,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="구매한 EAT딜"
+                android:textColor="@color/myPageBlack"
                 android:textSize="18sp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/purchased_eatdeal"
-                android:layout_marginStart="10dp"
-                android:textStyle="bold"/>
+                android:layout_marginStart="10dp" />
             <ImageView
                 android:id="@+id/purchased_eatdeal_arrow"
-                android:layout_width="20dp"
-                android:layout_height="35dp"
+                android:layout_width="13dp"
+                android:layout_height="wrap_content"
                 android:src="@drawable/arrow_btn"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="@id/purchased_eatdeal"
+                app:layout_constraintBottom_toBottomOf="@id/purchased_eatdeal"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="20dp"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -208,8 +210,8 @@
             android:background="@color/colorWhite">
             <ImageView
                 android:id="@+id/eatdeal_alarm"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
                 android:src="@drawable/eat_deal_alaram"
                 android:scaleType="fitXY"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -221,25 +223,29 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="EAT딜 입고알림"
+                android:textColor="@color/myPageBlack"
                 android:textSize="18sp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/eatdeal_alarm"
-                android:layout_marginStart="10dp"
-                android:textStyle="bold"/>
+                android:layout_marginStart="10dp" />
             <ImageView
                 android:id="@+id/eatdeal_alarm_arrow"
-                android:layout_width="20dp"
-                android:layout_height="35dp"
+                android:layout_width="13dp"
+                android:layout_height="wrap_content"
                 android:src="@drawable/arrow_btn"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="@id/eatdeal_alarm"
+                app:layout_constraintBottom_toBottomOf="@id/eatdeal_alarm"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="20dp"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
         <View
             android:layout_width="match_parent"
-            android:layout_height="15dp"/>
+            android:layout_height="0.5dp"
+            android:background="@color/colorLightGray"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="11dp"/>
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="140dp"
@@ -247,8 +253,8 @@
 
             <ImageView
                 android:id="@+id/timeline"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
                 android:src="@drawable/timeline"
                 android:scaleType="fitXY"
                 app:layout_constraintTop_toTopOf="parent"
@@ -260,21 +266,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="타임라인"
+                android:textColor="@color/myPageBlack"
                 android:textSize="18sp"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toTopOf="@id/timeline"
+                app:layout_constraintBottom_toBottomOf="@id/timeline"
                 app:layout_constraintStart_toEndOf="@id/timeline"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="25dp"
-                android:textStyle="bold"/>
+                android:layout_marginStart="10dp" />
             <ImageView
                 android:id="@+id/timeline_arrow"
-                android:layout_width="20dp"
-                android:layout_height="35dp"
+                android:layout_width="13dp"
+                android:layout_height="wrap_content"
                 android:src="@drawable/arrow_btn"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toTopOf="@id/timeline"
+                app:layout_constraintBottom_toBottomOf="@id/timeline"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="20dp"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginEnd="20dp" />
             <TextView
                 android:id="@+id/timeline_review"
                 android:layout_width="wrap_content"
@@ -373,8 +379,8 @@
             android:background="@color/colorWhite">
             <ImageView
                 android:id="@+id/favorite_star"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
                 android:src="@drawable/favorite_star"
                 android:scaleType="fitXY"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -387,18 +393,18 @@
                 android:layout_height="wrap_content"
                 android:text="가고싶다"
                 android:textSize="18sp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:textColor="@color/myPageBlack"
+                app:layout_constraintTop_toTopOf="@id/favorite_star"
+                app:layout_constraintBottom_toBottomOf="@id/favorite_star"
                 app:layout_constraintStart_toEndOf="@id/favorite_star"
-                android:layout_marginStart="10dp"
-                android:textStyle="bold"/>
+                android:layout_marginStart="10dp" />
             <ImageView
                 android:id="@+id/favorite_star_arrow"
-                android:layout_width="20dp"
-                android:layout_height="35dp"
+                android:layout_width="13dp"
+                android:layout_height="wrap_content"
                 android:src="@drawable/arrow_btn"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="@id/favorite_star"
+                app:layout_constraintBottom_toBottomOf="@id/favorite_star"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="20dp"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -418,8 +424,8 @@
             android:background="@color/colorWhite">
             <ImageView
                 android:id="@+id/myList_img"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
                 android:src="@drawable/mylist_btn"
                 android:scaleType="fitXY"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -432,18 +438,19 @@
                 android:layout_height="wrap_content"
                 android:text="마이리스트"
                 android:textSize="18sp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:textColor="@color/myPageBlack"
+                app:layout_constraintTop_toTopOf="@id/myList_img"
+                app:layout_constraintBottom_toBottomOf="@id/myList_img"
                 app:layout_constraintStart_toEndOf="@id/myList_img"
                 android:layout_marginStart="10dp"
-                android:textStyle="bold"/>
+                />
             <ImageView
                 android:id="@+id/myList_arrow"
-                android:layout_width="20dp"
-                android:layout_height="35dp"
+                android:layout_width="13dp"
+                android:layout_height="wrap_content"
                 android:src="@drawable/arrow_btn"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="@id/myList_img"
+                app:layout_constraintBottom_toBottomOf="@id/myList_img"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="20dp"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -463,8 +470,8 @@
             android:background="@color/colorWhite">
             <ImageView
                 android:id="@+id/bookmark"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
                 android:src="@drawable/bookmark_btn"
                 android:scaleType="fitXY"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -477,18 +484,18 @@
                 android:layout_height="wrap_content"
                 android:text="북마크"
                 android:textSize="18sp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="@id/bookmark"
+                app:layout_constraintBottom_toBottomOf="@id/bookmark"
                 app:layout_constraintStart_toEndOf="@id/bookmark"
-                android:layout_marginStart="10dp"
-                android:textStyle="bold"/>
+                android:textColor="@color/myPageBlack"
+                android:layout_marginStart="10dp" />
             <ImageView
                 android:id="@+id/bookmark_arrow"
-                android:layout_width="20dp"
-                android:layout_height="35dp"
+                android:layout_width="13dp"
+                android:layout_height="wrap_content"
                 android:src="@drawable/arrow_btn"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="@id/bookmark"
+                app:layout_constraintBottom_toBottomOf="@id/bookmark"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="20dp"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -508,8 +515,8 @@
             android:background="@color/colorWhite">
             <ImageView
                 android:id="@+id/registered_restaurant"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
                 android:src="@drawable/my_restaurant_list"
                 android:scaleType="fitXY"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -522,32 +529,36 @@
                 android:layout_height="wrap_content"
                 android:text="내가 등록한 식당"
                 android:textSize="18sp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="@id/registered_restaurant"
+                app:layout_constraintBottom_toBottomOf="@id/registered_restaurant"
                 app:layout_constraintStart_toEndOf="@id/registered_restaurant"
                 android:layout_marginStart="10dp"
-                android:textStyle="bold"/>
+                android:textColor="@color/myPageBlack"/>
             <ImageView
                 android:id="@+id/registered_restaurant_arrow"
-                android:layout_width="20dp"
-                android:layout_height="35dp"
+                android:layout_width="13dp"
+                android:layout_height="wrap_content"
                 android:src="@drawable/arrow_btn"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="@id/registered_restaurant"
+                app:layout_constraintBottom_toBottomOf="@id/registered_restaurant"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="20dp"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
         <View
             android:layout_width="match_parent"
-            android:layout_height="15dp"/>
+            android:layout_height="0.5dp"
+            android:background="@color/colorLightGray"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="11dp"/>
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="@color/colorWhite">
             <ImageView
                 android:id="@+id/setting"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
                 android:src="@drawable/setting"
                 android:scaleType="fitXY"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -560,18 +571,17 @@
                 android:layout_height="wrap_content"
                 android:text="설정"
                 android:textSize="18sp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="@id/setting"
+                app:layout_constraintBottom_toBottomOf="@id/setting"
                 app:layout_constraintStart_toEndOf="@id/setting"
-                android:layout_marginStart="10dp"
-                android:textStyle="bold"/>
+                android:layout_marginStart="10dp" />
             <ImageView
                 android:id="@+id/setting_arrow"
-                android:layout_width="20dp"
-                android:layout_height="35dp"
+                android:layout_width="13dp"
+                android:layout_height="wrap_content"
                 android:src="@drawable/arrow_btn"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="@id/setting"
+                app:layout_constraintBottom_toBottomOf="@id/setting"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="20dp"/>
         </androidx.constraintlayout.widget.ConstraintLayout>

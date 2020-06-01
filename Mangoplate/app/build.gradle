@@ -41,5 +41,7 @@ dependencies {
 
     implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
 
+    implementation 'it.sephiroth.android.library.viewrevealanimator:view-reveal-animator:1.1.4'
 
+    implementation 'com.mikhaellopez:circularimageview:4.2.0'
 }

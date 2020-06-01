@@ -1,18 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/login_background_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/login_image"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
     <ImageView
         android:id="@+id/login_mp_logo"
         android:layout_width="200dp"
-        android:layout_height="80dp"
+        android:layout_height="wrap_content"
         android:src="@drawable/mangoplate_logo"
         android:scaleType="fitXY"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/login_textView"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="33dp"
         android:tint="@color/white"
         android:adjustViewBounds="true"/>
     <TextView
@@ -22,13 +33,14 @@
         android:text="맛 집 찾 고 싶 을 때"
         android:textSize="17sp"
         android:textColor="@color/white"
+        android:layout_marginBottom="21dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
     <ImageView
-        android:layout_width="2dp"
-        android:layout_height="2dp"
+        android:layout_width="4dp"
+        android:layout_height="4dp"
         android:scaleType="fitXY"
         android:adjustViewBounds="true"
         app:layout_constraintStart_toStartOf="@id/login_textView"
@@ -36,21 +48,15 @@
         android:layout_marginStart="6dp"
         android:src="@drawable/logo_textview_whitedot"/>
     <ImageView
-        android:layout_width="2dp"
-        android:layout_height="2dp"
+        android:layout_width="4dp"
+        android:layout_height="4dp"
         android:scaleType="fitXY"
         android:adjustViewBounds="true"
         app:layout_constraintStart_toStartOf="@id/login_textView"
         app:layout_constraintBottom_toTopOf="@id/login_textView"
         android:layout_marginStart="25dp"
         android:src="@drawable/logo_textview_whitedot"/>
-    <com.facebook.login.widget.LoginButton
-        android:id="@+id/login_facebook"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/login_facebook_btn"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+
     <ImageButton
         android:id="@+id/login_facebook_btn"
         android:layout_width="210dp"
@@ -74,17 +80,7 @@
         android:layout_marginTop="10dp"
         android:src="@drawable/login_kakaotalk_btn"/>
 
-    <ImageView
-        android:id="@+id/login_email_btn"
-        android:layout_width="210dp"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:scaleType="fitXY"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/login_kakaotalk_btn"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/login_kakaotalk_btn"/>
+
 
     <TextView
         android:id="@+id/login_skip"

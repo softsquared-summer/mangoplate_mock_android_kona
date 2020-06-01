@@ -16,6 +16,7 @@ import com.softsquared.template.src.main.MainActivity;
 import org.json.JSONObject;
 
 import static com.softsquared.template.src.ApplicationClass.TAG;
+import static com.softsquared.template.src.ApplicationClass.sSharedPreferences;
 
 public class FacebookLoginCallback implements FacebookCallback<LoginResult> {
 
@@ -50,6 +51,8 @@ public class FacebookLoginCallback implements FacebookCallback<LoginResult> {
 
         Bundle parameters = new Bundle();
         parameters.putString("fields", "id,name,email,gender,birthday");
+        String name = parameters.getString("name");
+        sSharedPreferences.edit().putString("name", name);
         graphRequest.setParameters(parameters);
         graphRequest.executeAsync();
     }
