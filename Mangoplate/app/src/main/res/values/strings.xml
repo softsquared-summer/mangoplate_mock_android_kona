@@ -5,5 +5,8 @@
     <string name="kakao_app_key">d6a366c366c7a01f1437bee725839538</string>
     <string name="facebook_app_id">269317831086484</string>
     <string name="fb_login_protocol_scheme">fb269317831086484</string>
+    <string name="search_category"><u><b>평점순</b></u></string>
+    <string name="location_tv"><u><b>금천구</b></u></string>
+
 
 </resources>

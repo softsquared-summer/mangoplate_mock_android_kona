@@ -7,30 +7,29 @@ import com.softsquared.template.src.main.search_restaurant.models.TopPhotoRespon
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.Query;
 
 public interface SearchRestaurantRetrofitInterface {
 
 
     @GET("/events")
+    @Headers("Content-Type: application/json")
     Call<TopPhotoResponse> getTopPhoto(
+            @Header("x-access-token") String accessToken,
             @Query("type") String type
     );
 
 
     @GET("/restaurants")
+    @Headers("Content-Type: application/json")
     Call<SearchRestaurantResponse> getSearchRestaurant(
+            @Header("x-access-token") String accessToken,
             @Query("lat") float lat,
             @Query("lng") float lng,
             @Query("type") String type,
-            @Query("area") String area,
-            @Query("order") String order,
-            @Query("category") String category,
-            @Query("price") String price,
-            @Query("parking") String parking,
-            @Query("radius") String radius,
-            @Query("page") String page,
-            @Query("size") String size
+            @Query("area") String area
+
     );
 
 }

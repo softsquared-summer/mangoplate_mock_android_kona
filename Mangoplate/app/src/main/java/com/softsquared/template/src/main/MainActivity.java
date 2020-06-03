@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -13,8 +14,10 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationMenu;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.softsquared.template.R;
 import com.softsquared.template.src.BaseActivity;
@@ -62,6 +65,7 @@ public class MainActivity extends BaseActivity implements MainActivityView {
         animationSetting();
         floatinAnim();
         setViwewPager();
+        mainService.getMyInfo();
 
     }
 
@@ -90,6 +94,11 @@ public class MainActivity extends BaseActivity implements MainActivityView {
         bottomNavigationView = findViewById(R.id.bottom_navigation_view);
         floatingActionCloseButton = findViewById(R.id.middle_floating_action_close_button);
 
+//        Menu search = bottomNavigationView.getMenu();
+//        Menu discount = bottomNavigationView.getMenu();
+//        Menu notice = bottomNavigationView.getMenu();
+//        Menu myprofile = bottomNavigationView.getMenu();
+//        Glide.with(this).load(R.drawable.search_icon_btn).into(search);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

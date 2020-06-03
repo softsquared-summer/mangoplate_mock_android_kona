@@ -6,5 +6,5 @@ public interface LoginActivityView {
 
     void LoginSuccess(LoginInfo loginInfo);
 
-    void LoginFailure(String message);
+    void LoginFailure( );
 }

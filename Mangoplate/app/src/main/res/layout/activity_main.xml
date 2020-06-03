@@ -27,6 +27,7 @@
 <!--        <androidx.constraintlayout.widget.ConstraintLayout-->
 <!--            android:layout_width="match_parent"-->
 <!--            android:layout_height="match_parent">-->
+
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/bottom_navigation_view"
                 android:layout_width="match_parent"
@@ -34,25 +35,28 @@
                 android:layout_gravity="bottom"
                 android:background="@color/colorWhite"
                 app:menu="@menu/bottom_navigation_menu"
-                android:elevation="10sp"
+                app:elevation="0dp"
+                app:itemIconSize="40dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:itemBackground="@color/colorWhite"
                 app:itemIconTint="@color/bottomnavigiation_select"
                 app:itemTextColor="@color/bottomnavigiation_select"
-                app:labelVisibilityMode="labeled">
+                app:labelVisibilityMode="unlabeled">
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/middle_floating_action_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:scaleType="fitXY"
                     android:layout_gravity="bottom|center"
-                    android:elevation="0dp"
+                    android:backgroundTint="@color/orange_red"
                     android:src="@drawable/middle_floating_button"
+                    app:elevation="0dp"
                     app:fabSize="mini"
+                    app:borderWidth="0dp"
                     android:layout_marginBottom="10dp"/>
             </com.google.android.material.bottomnavigation.BottomNavigationView>
-<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+// 버튼 눌렀을 때의 화면
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -65,7 +69,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginStart="30dp"
-                android:layout_marginBottom="100dp">
+                android:layout_marginBottom="90dp">
                 <ImageView
                     android:id="@+id/float_register_restaurant_img"
                     android:layout_width="25dp"
@@ -86,7 +90,7 @@
                     android:layout_marginStart="20dp"
                     android:text="식당 등록하기"
                     android:textColor="@color/white"
-                    android:textSize="20sp"/>
+                    android:textSize="24sp"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/float_write_review_const"
@@ -94,7 +98,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="@id/float_register_restaurant_const"
                 app:layout_constraintBottom_toTopOf="@id/float_register_restaurant_const"
-                android:layout_marginBottom="30dp">
+                android:layout_marginBottom="35dp">
                 <ImageView
                     android:id="@+id/float_write_review_img"
                     android:layout_width="25dp"
@@ -115,7 +119,7 @@
                     android:layout_marginStart="20dp"
                     android:text="리뷰 쓰기"
                     android:textColor="@color/white"
-                    android:textSize="20sp"/>
+                    android:textSize="24sp"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/float_gone_const"
@@ -123,7 +127,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="@id/float_register_restaurant_const"
                 app:layout_constraintBottom_toTopOf="@id/float_write_review_const"
-                android:layout_marginBottom="30dp">
+                android:layout_marginBottom="35dp">
                 <ImageView
                     android:id="@+id/float_gone_img"
                     android:layout_width="25dp"
@@ -144,7 +148,7 @@
                     android:layout_marginStart="20dp"
                     android:text="가봤어요"
                     android:textColor="@color/white"
-                    android:textSize="20sp"/>
+                    android:textSize="24sp"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/float_go_to_eatdeal_const"
@@ -152,7 +156,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="@id/float_register_restaurant_const"
                 app:layout_constraintBottom_toTopOf="@id/float_gone_const"
-                android:layout_marginBottom="30dp">
+                android:layout_marginBottom="35dp">
                 <ImageView
                     android:id="@+id/float_go_to_eatdeal_img"
                     android:layout_width="25dp"
@@ -173,22 +177,25 @@
                     android:layout_marginStart="20dp"
                     android:text="EAT딜 보러가기"
                     android:textColor="@color/white"
-                    android:textSize="20sp"/>
+                    android:textSize="24sp"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/middle_floating_action_close_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:scaleType="fitXY"
+                android:backgroundTint="@color/white"
+                android:src="@drawable/float_close_btn"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:elevation="0dp"
-                android:src="@drawable/float_close_btn"
+                app:elevation="0dp"
                 app:fabSize="mini"
-                android:layout_marginBottom="5dp"/>
+                app:borderWidth="0dp"
+                android:layout_marginBottom="10dp"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
     </it.sephiroth.android.library.viewrevealanimator.ViewRevealAnimator>

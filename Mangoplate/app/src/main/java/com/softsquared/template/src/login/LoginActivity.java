@@ -54,7 +54,7 @@ public class LoginActivity extends BaseActivity implements LoginActivityView {
     public void FacebookLogin()
     {
         callbackManager = CallbackManager.Factory.create();
-        facebookLoginCallback = new FacebookLoginCallback();
+        facebookLoginCallback = new FacebookLoginCallback(this);
 
         facebookLoginBtn = findViewById(R.id.login_facebook_btn);
 
@@ -64,16 +64,7 @@ public class LoginActivity extends BaseActivity implements LoginActivityView {
             public void onClick(View v) {
                 LoginManager loginManager = LoginManager.getInstance();
                 loginManager.logInWithReadPermissions(LoginActivity.this, Arrays.asList("public_profile", "email"));
-                accessToken = AccessToken.getCurrentAccessToken();
-                if(accessToken != null)
-                {
-                    accessToken = AccessToken.getCurrentAccessToken();
-                    tryPost("facebook", accessToken.getToken());
-                    loginManager.registerCallback(callbackManager, facebookLoginCallback);
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
+                loginManager.registerCallback(callbackManager, facebookLoginCallback);
 
             }
         });
@@ -91,23 +82,16 @@ public class LoginActivity extends BaseActivity implements LoginActivityView {
 
         sSharedPreferences.edit().putString(X_ACCESS_TOKEN, loginInfo.getJwt()).apply();
 
-        Log.e(TAG, "로그인 성공");
+        Log.e(TAG, "jwt : " + sSharedPreferences.getString(X_ACCESS_TOKEN, ""));
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
 
     }
 
-    public void tryPost(String type, String jwtToken)
-    {
-        showProgressDialog();
-        loginService.postFacebook(jwtToken);
-    }
-
     @Override
-    public void LoginFailure(@Nullable String message) {
-        hideProgressDialog();
-        showCustomToast(message == null || message.isEmpty() ? getString(R.string.network_error) : message);
+    public void LoginFailure() {
+
     }
 
 }

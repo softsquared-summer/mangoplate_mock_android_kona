@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/white"
         android:layout_height="50dp"
         android:orientation="vertical">
         <TextView
@@ -24,7 +25,7 @@
             android:textColor="#000000"
             android:textSize="10sp"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="5dp"/>
+            android:layout_marginTop="8dp"/>
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/search_restaurant_location_textView_constraintLayout"
             android:layout_width="wrap_content"
@@ -42,17 +43,50 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:textColor="#000000"
                 android:textStyle="bold"
-                android:textSize="17sp"
-                android:text="성남시"/>
+                android:layout_marginBottom="5dp"
+                android:textSize="18sp"
+                android:text="@string/location_tv"/>
             <ImageView
                 android:id="@+id/down_arrow"
                 android:layout_width="9dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toEndOf="@id/search_restaurant_location_textView"
                 app:layout_constraintTop_toTopOf="@id/search_restaurant_location_textView"
+                android:layout_marginStart="4dp"
                 app:layout_constraintBottom_toBottomOf="@id/search_restaurant_location_textView"
                 android:src="@drawable/down_arrow"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
+        <View
+            android:id="@+id/divider_search"
+            android:layout_width="1dp"
+            android:layout_height="25dp"
+            android:background="@color/colorLightGray"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintEnd_toStartOf="@+id/restaurant_map"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:layout_editor_absoluteY="5dp" />
+        <ImageView
+            android:id="@+id/restaurant_map"
+            android:layout_width="28dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/restaurant_map"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="24dp"
+            android:layout_gravity="end"
+            android:layout_marginRight="10dp"
+            android:baselineAligned="true"
+            android:src="@drawable/restaurant_search"
+            app:layout_constraintEnd_toStartOf="@+id/divider_search"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     <ScrollView
@@ -65,7 +99,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <androidx.viewpager2.widget.ViewPager2
+            <androidx.viewpager.widget.ViewPager
                 android:id="@+id/search_restaurant_ad_viewPager"
                 android:layout_width="match_parent"
                 android:layout_height="145dp"
@@ -83,18 +117,24 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_marginStart="10dp"
-                    android:text="평점순 ▼"
-                    android:textSize="18sp"/>
+                    android:text="@string/search_category" />
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="10dp"
+                    app:layout_constraintTop_toTopOf="@id/search_category"
+                    app:layout_constraintBottom_toBottomOf="@id/search_category"
+                    app:layout_constraintStart_toEndOf="@id/search_category"
+                    android:src="@drawable/search_restaurant_arrow_bot"/>
+
                 <ImageView
                     android:id="@+id/location_btn"
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:layout_height="35dp"
-                    android:scaleType="fitXY"
                     android:src="@drawable/location_btn"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/filter_btn"
-                    android:layout_marginEnd="10dp"
+                    android:layout_marginEnd="5dp"
                     android:adjustViewBounds="true"/>
                 <ImageView
                     android:id="@+id/filter_btn"
@@ -105,8 +145,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:src="@drawable/filter_btn"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitXY"/>
+                    android:adjustViewBounds="true" />
             </androidx.constraintlayout.widget.ConstraintLayout>
             <ImageView
                 android:layout_width="match_parent"
@@ -115,6 +154,8 @@
                 android:src="@drawable/middle_ad_image"/>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/search_restaurant_recyclerView"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </LinearLayout>

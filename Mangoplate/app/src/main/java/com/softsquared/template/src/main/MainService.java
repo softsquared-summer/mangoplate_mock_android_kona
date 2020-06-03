@@ -11,6 +11,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.softsquared.template.src.ApplicationClass.TAG;
+import static com.softsquared.template.src.ApplicationClass.X_ACCESS_TOKEN;
 import static com.softsquared.template.src.ApplicationClass.getRetrofit;
 
 public class MainService {
@@ -25,7 +26,7 @@ public class MainService {
     void getMyInfo()
     {
         MainRetrofitInterface mainRetrofitInterface = getRetrofit().create(MainRetrofitInterface.class);
-        mainRetrofitInterface.getUserInfo().enqueue(new Callback<UserInfoResponse>() {
+        mainRetrofitInterface.getUserInfo(X_ACCESS_TOKEN).enqueue(new Callback<UserInfoResponse>() {
             @Override
             public void onResponse(Call<UserInfoResponse> call, Response<UserInfoResponse> response) {
                 UserInfoResponse userInfoResponse = response.body();

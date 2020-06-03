@@ -29,7 +29,7 @@ public class EatdealService {
     RecyclerView recyclerView;
     GridLayoutManager gridLayoutManager;
     EatdealInfo eatdealInfo = new EatdealInfo();
-    EatdealService(MainActivity mainActivity)
+    public EatdealService(MainActivity mainActivity)
     {
         this.mainActivity = mainActivity;
     }
@@ -37,7 +37,7 @@ public class EatdealService {
     void tryGetEatdeal()
     {
         final EatdealRetrofitInterface eatdealRetrofitInterface = getRetrofit().create(EatdealRetrofitInterface.class);
-        Log.e("성공", "성공");
+        Log.e("Eatdeal 성공", "성공");
         eatdealRetrofitInterface.toString();
 
         eatdealRetrofitInterface.getEatdeal(X_ACCESS_TOKEN).enqueue(new Callback<EatdealResponse>() {
@@ -79,8 +79,4 @@ public class EatdealService {
         recyclerView.setAdapter(eatdealRecyclerAdapter);
         Log.e("어댑터 장착 완료", "어댑");
     }
-
-
-
-
 }

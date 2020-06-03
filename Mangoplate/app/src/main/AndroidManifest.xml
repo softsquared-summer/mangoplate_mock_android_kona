@@ -7,9 +7,6 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-
-    출처: https://whiteduck.tistory.com/124 [이헌제의 블로그]
-
     <application
         android:name=".src.ApplicationClass"
         android:allowBackup="true"

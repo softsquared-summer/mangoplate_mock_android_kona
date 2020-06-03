@@ -24,30 +24,29 @@ class LoginService {
         this.mLoginActivityView = loginActivityView;
     }
 
-    void postFacebook(String at) {
+    void postFacebook(String loginType, String at) {
         final LoginRetrofitInterface mLoginRetrofitInterface = getRetrofit().create(LoginRetrofitInterface.class);
-        mLoginRetrofitInterface.postFacebook("facebook", new LoginBody(at)).enqueue(new Callback<DefaultResponse>() {
+        mLoginRetrofitInterface.postFacebook(loginType, new LoginBody(at)).enqueue(new Callback<DefaultResponse>() {
             @Override
             public void onResponse(Call<DefaultResponse> call, Response<DefaultResponse> response) {
                 DefaultResponse defaultResponse = response.body();
-                if(response.code() == 200)
+                if(defaultResponse == null)
                 {
-                    DefaultResponse finalResponse = response.body();
-                    if(finalResponse.getResult() != null)
-                    {
-                        ApplicationClass.X_ACCESS_TOKEN = finalResponse.getResult().getJwt();
-                        Log.e(TAG, "jwt값" + X_ACCESS_TOKEN);
-                    }
+                    Log.e(TAG, "LoginResponse is null");
+                    mLoginActivityView.LoginFailure();
                 }
-                else
+                else if (!defaultResponse.getIsSuccess())
                 {
-                    mLoginActivityView.LoginFailure(null);
+                    Log.e(TAG, "" + defaultResponse.getCode());
+                    Log.e(TAG, "" + defaultResponse.getMessage());
+                    mLoginActivityView.LoginFailure();
                 }
+                mLoginActivityView.LoginSuccess(defaultResponse.getResult());
             }
 
             @Override
             public void onFailure(Call<DefaultResponse> call, Throwable t) {
-                mLoginActivityView.LoginFailure(null);
+                mLoginActivityView.LoginFailure();
                 Log.e(TAG,"로그인 실패");
             }
         });

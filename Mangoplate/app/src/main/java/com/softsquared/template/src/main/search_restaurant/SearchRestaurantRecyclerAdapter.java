@@ -1,6 +1,7 @@
 package com.softsquared.template.src.main.search_restaurant;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.softsquared.template.R;
+import com.softsquared.template.src.main.MainActivity;
 import com.softsquared.template.src.main.restaurant_detail.RestaurantDetailActivity;
 import com.softsquared.template.src.main.search_restaurant.models.SearchRestaurantInfo;
 
@@ -23,10 +25,11 @@ public class SearchRestaurantRecyclerAdapter extends RecyclerView.Adapter<Search
     private ArrayList<SearchRestaurantInfo> searchRestaurantInfoArrayList = new ArrayList<>();
 
     private SearchRestaurantFragment searchRestaurantFragment;
+    private MainActivity mainActivity;
 
-    public SearchRestaurantRecyclerAdapter(SearchRestaurantFragment searchRestaurantFragment)
+    public SearchRestaurantRecyclerAdapter(MainActivity mainActivity)
     {
-        this.searchRestaurantFragment = searchRestaurantFragment;
+        this.mainActivity = mainActivity;
     }
 
 
@@ -98,6 +101,7 @@ public class SearchRestaurantRecyclerAdapter extends RecyclerView.Adapter<Search
                     {
                         Intent intent  = new Intent(itemView.getContext(), RestaurantDetailActivity.class);
                         intent.putExtra("restaurantId", restaurantId);
+                        Log.e(" resid", "" +restaurantId);
                         itemView.getContext().startActivity(intent);
                     }
                 }
@@ -109,6 +113,7 @@ public class SearchRestaurantRecyclerAdapter extends RecyclerView.Adapter<Search
         {
             Glide.with(itemView.getContext()).load(searchRestaurantInfo.getImg()).into(restaurant_image);
 
+            restaurantId = searchRestaurantInfo.getRestaurantId();
             restaurant_name.setText(searchRestaurantInfo.getTitle());
             restaurant_distance.setText(searchRestaurantInfo.getArea() + " - " + searchRestaurantInfo.getDistance());
             restaurant_views.setText(searchRestaurantInfo.getSeenNum());
@@ -118,7 +123,7 @@ public class SearchRestaurantRecyclerAdapter extends RecyclerView.Adapter<Search
                 case "orange":
                 {
                     restaurant_rate.setVisibility(View.VISIBLE);
-                    restaurant_rate.setTextColor(itemView.getResources().getColor(R.color.orange));
+                    restaurant_rate.setTextColor(itemView.getResources().getColor(R.color.orange_red));
                     break;
                 }
                 case "gray":

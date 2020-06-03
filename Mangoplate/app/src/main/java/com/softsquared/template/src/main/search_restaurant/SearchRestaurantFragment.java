@@ -2,24 +2,33 @@ package com.softsquared.template.src.main.search_restaurant;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Paint;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.softsquared.template.R;
 import com.softsquared.template.src.main.GPSService;
 import com.softsquared.template.src.main.MainActivity;
 import com.softsquared.template.src.main.search_restaurant.interfaces.SearchRestaurantActivityView;
 import com.softsquared.template.src.main.search_restaurant.models.SearchRestaurantInfo;
+import com.softsquared.template.src.main.search_restaurant.models.SearchRestaurantResponse;
 import com.softsquared.template.src.main.search_restaurant.models.TopPhotoInfo;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.function.LongFunction;
+
+import javax.net.ssl.SNIHostName;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,14 +36,17 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
 public class SearchRestaurantFragment extends Fragment implements SearchRestaurantActivityView {
 
     MainActivity mainActivity;
+    int currentPage = 0;
     private ViewGroup mViewGroup;
-    private ViewPager2 topViewPager;
+    private ViewPager topViewPager;
     Context mContext;
+    SearchRestaurantActivityView searchRestaurantActivityView;
     SearchRestaurantTopAdAdapter searchRestaurantTopAdAdapter;
     SearchRestaurantService searchRestaurantService;
     SearchRestaurantRecyclerAdapter searchRestaurantRecyclerAdapter;
@@ -43,7 +55,9 @@ public class SearchRestaurantFragment extends Fragment implements SearchRestaura
     LocationManager locationManager;
     GPSService gpsService;
     TimerTask timerTask;
+    Timer timer;
     private boolean topBannerReady;
+    private Runnable runnable;
     private static final int REQUEST_CODE_LOCATION = 2;
 
     public static SearchRestaurantFragment newInstance()
@@ -54,7 +68,7 @@ public class SearchRestaurantFragment extends Fragment implements SearchRestaura
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        this.mContext = context;
+        mContext = context;
         mainActivity = (MainActivity)getActivity();
     }
 
@@ -63,91 +77,108 @@ public class SearchRestaurantFragment extends Fragment implements SearchRestaura
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         mViewGroup = (ViewGroup) inflater.inflate(R.layout.search_restaurant_layout, container, false);
-
-
         gpsService = new GPSService(getContext());
+
         searchRestaurantService = new SearchRestaurantService(this);
+        underline();
         setTopPhoto();
         setBannerTimer();
+        init();
+        searchRestaurantService.getRestaurantList();
+
 
         return mViewGroup;
     }
 
-    private void initView()
+// 단어 밑줄 긋기
+    private void underline()
     {
-        int column = 2;
+        TextView location_textView = mViewGroup.findViewById(R.id.search_restaurant_location_textView);
+        TextView search_category = mViewGroup.findViewById(R.id.search_category);
+
+        location_textView.setPaintFlags(location_textView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        search_category.setPaintFlags(search_category.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+
+    }
+
+    // 음식점 찾는 부분 리사이클러뷰 장착
+    private void init()
+    {
         searchRestaurantRecyclerview = mViewGroup.findViewById(R.id.search_restaurant_recyclerView);
-        gridLayoutManager = new GridLayoutManager(getContext(), column);
+        gridLayoutManager = new GridLayoutManager(mainActivity, 2);
         searchRestaurantRecyclerview.setLayoutManager(gridLayoutManager);
-        searchRestaurantRecyclerAdapter = new SearchRestaurantRecyclerAdapter(this);
+        searchRestaurantRecyclerAdapter = new SearchRestaurantRecyclerAdapter(mainActivity);
         searchRestaurantRecyclerview.setAdapter(searchRestaurantRecyclerAdapter);
-//        showProgressDialog();
-//        searchRestaurantService.getSearchRestaurant();
+        Log.e("리사이클러 뷰 어댑터 장착 완료", "어댑");
     }
 
 
+    // 상단 광고 부분 어댑터 장착
     private void setTopPhoto()
     {
         mainActivity.showProgressDialog();
 
-        searchRestaurantTopAdAdapter = new SearchRestaurantTopAdAdapter();
+        PagerAdapter pagerAdapter = new SearchRestaurantTopAdAdapter(getContext());
         topViewPager = mViewGroup.findViewById(R.id.search_restaurant_ad_viewPager);
-        topViewPager.setAdapter(searchRestaurantTopAdAdapter);
+        topViewPager.setAdapter(pagerAdapter);
+        Log.e("Topphoto", "어댑터 장착완료");
 
         final SearchRestaurantService searchRestaurantService = new SearchRestaurantService(this);
-        topViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-            @Override
-            public void onPageScrollStateChanged(int state) {
-                super.onPageScrollStateChanged(state);
-                MainActivity mainActivity = (MainActivity) getActivity();
-                if(mainActivity != null)
-                {
-                    mainActivity.mainViewpager.setUserInputEnabled(true);
-                }
-            }
-        });
-
     }
 
+    // 상단 광고 부분 사진 넘어가는 시간
     private void setBannerTimer()
     {
-        timerTask = new TimerTask() {
+        final long DELAY = 3000;
+        final long STAY = 3000;
+
+        Handler handler = new Handler();
+        runnable = new Runnable() {
             @Override
             public void run() {
-                int index = topViewPager.getCurrentItem();
-                int adcount = searchRestaurantTopAdAdapter.getItemCount();
-                int nextindex = (index + 1) % adcount;
-                new Handler(Looper.getMainLooper())
-                        .postDelayed(() -> topViewPager.setCurrentItem(nextindex), 2000);
-
+                if(currentPage == 7)
+                {
+                    currentPage = 0;
+                }
+                topViewPager.setCurrentItem(currentPage++, true);
             }
         };
-        new Timer().schedule(timerTask, 0, 2000);
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(runnable);
+            }
+        }, DELAY, STAY);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if(topBannerReady)
-        {
-            if(timerTask == null)
-                setBannerTimer();
-            else
-                timerTask.run();
-        }
+        setBannerTimer();
+    }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+//        searchRestaurantTopAdAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        timer.cancel();
+//        searchRestaurantTopAdAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onDestroyView() {
+        searchRestaurantTopAdAdapter.notifyDataSetChanged();
+        super.onDestroyView();
     }
 
     @Override
     public void GetTopPhotoOnSuccess(ArrayList<TopPhotoInfo> topPhotoInfoArrayList) {
-        for(TopPhotoInfo b : topPhotoInfoArrayList)
-            searchRestaurantTopAdAdapter.add(b);
-
-        searchRestaurantTopAdAdapter.notifyDataSetChanged();
-        topBannerReady = true;
-        setBannerTimer();
-
-        mainActivity.hideProgressDialog();
 
     }
 
@@ -158,17 +189,16 @@ public class SearchRestaurantFragment extends Fragment implements SearchRestaura
     }
 
     @Override
-    public void GetSearchRestaurantOnSuccess(ArrayList<SearchRestaurantInfo> restaurantInfos) {
+    public void GetSearchRestaurantOnSuccess(SearchRestaurantResponse searchRestaurantResponse) {
         searchRestaurantRecyclerAdapter.clear();
 
-        for(SearchRestaurantInfo restaurantInfo : restaurantInfos)
+        for(SearchRestaurantInfo restaurantInfo : searchRestaurantResponse.getResult())
             searchRestaurantRecyclerAdapter.add(restaurantInfo);
 
         searchRestaurantRecyclerAdapter.notifyDataSetChanged();
         mainActivity.hideProgressDialog();
 
     }
-
 
 
     @Override

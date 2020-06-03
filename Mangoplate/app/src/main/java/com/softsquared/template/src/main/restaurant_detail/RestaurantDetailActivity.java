@@ -1,6 +1,7 @@
 package com.softsquared.template.src.main.restaurant_detail;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -8,7 +9,6 @@ import android.widget.TextView;
 
 import com.amar.library.ui.StickyScrollView;
 import com.amar.library.ui.interfaces.IScrollViewListener;
-import com.google.android.material.bottomnavigation.BottomNavigationMenu;
 import com.softsquared.template.R;
 import com.softsquared.template.src.BaseActivity;
 import com.softsquared.template.src.main.restaurant_detail.interfaces.RestaurantDetailActivityView;
@@ -24,7 +24,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class RestaurantDetailActivity extends BaseActivity implements RestaurantDetailActivityView {
-    final private RestaurantDetailService restaurantDetailService = new RestaurantDetailService(this, this);
+    RestaurantDetailService restaurantDetailService;
     private RestaurantDetailTopPhotoAdapter restaurantDetailTopPhotoAdapter;
     private RestaurantDetailMenuAdapter restaurantDetailMenuAdapter;
 
@@ -39,9 +39,9 @@ public class RestaurantDetailActivity extends BaseActivity implements Restaurant
         Intent intent = getIntent();
         if(intent != null)
         {
-            restaurantId = intent.getIntExtra("restaurantId", 0);
-            restaurantDetailService.getRestaurantDetail(restaurantId);
-            showProgressDialog();
+            restaurantId = intent.getIntExtra("restaurantId", restaurantId);
+            restaurantDetailService = new RestaurantDetailService(this, restaurantId);
+            restaurantDetailService.getRestaurantDetail();
         }
 
         StickyScrollView();
@@ -65,7 +65,7 @@ public class RestaurantDetailActivity extends BaseActivity implements Restaurant
             public void onScrollChanged(int l, int t, int oldl, int oldt) {
                 if(t > oldt && stickyScrollView.isHeaderSticky())
                 {
-                    topBar.setBackgroundColor(getResources().getColor(R.color.orange));
+                    topBar.setBackgroundColor(getResources().getColor(R.color.orange_red));
                     downArrowImg.setColorFilter(getResources().getColor(R.color.white));
                     cameraImg.setColorFilter(getResources().getColor(R.color.white));
                     linkImg.setColorFilter(getResources().getColor(R.color.white));
@@ -129,7 +129,7 @@ public class RestaurantDetailActivity extends BaseActivity implements Restaurant
             case "orange":
                 {
                     restaurant_detail_rate_textview.setVisibility(View.VISIBLE);
-                    restaurant_detail_rate_textview.setTextColor(getResources().getColor(R.color.orange));
+                    restaurant_detail_rate_textview.setTextColor(getResources().getColor(R.color.orange_red));
                     break;
                 }
             case "gray":
@@ -163,13 +163,13 @@ public class RestaurantDetailActivity extends BaseActivity implements Restaurant
         restaurant_detail_resinfo_price.setText(restaurantDetailInfo.getInfoDescription());
 
         ArrayList<RestaurantDetailMenuInfo> restaurantDetailMenuInfoArrayList = restaurantDetailInfo.getMenu();
-        restaurantDetailMenuAdapter.clear();
+//        restaurantDetailMenuAdapter.clear();
         for(RestaurantDetailMenuInfo restaurantDetailMenuInfo : restaurantDetailMenuInfoArrayList)
         {
             restaurantDetailMenuAdapter.add(restaurantDetailMenuInfo);
         }
 
-        restaurantDetailMenuAdapter.notifyDataSetChanged();
+//        restaurantDetailMenuAdapter.notifyDataSetChanged();
 
 
     }
