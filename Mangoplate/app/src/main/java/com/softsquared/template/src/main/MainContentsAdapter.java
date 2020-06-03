@@ -7,48 +7,35 @@ import com.softsquared.template.src.main.search_restaurant.SearchRestaurantFragm
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-public class MainContentsAdapter extends FragmentStatePagerAdapter {
+public class MainContentsAdapter extends FragmentStateAdapter {
 
     private int mTabCount;
     private ViewPager mViewPager;
 
 
-    public MainContentsAdapter(@NonNull FragmentManager fm, int mTabCount) {
-        super(fm, mTabCount);
+    public MainContentsAdapter(@NonNull FragmentActivity fm, int mTabCount) {
+        super(fm);
         this.mTabCount = mTabCount;
 
     }
 
     @NonNull
     @Override
-    public Fragment getItem(int position) {
-        switch(position)
-        {
-            case 0:
-                SearchRestaurantFragment searchFragment = new SearchRestaurantFragment();
-                return searchFragment;
-            case 1:
-                DiscountFragment discountFragment = new DiscountFragment();
-                return discountFragment;
-            case 2:
-                AnnouncementFragment  announcementFragment= new AnnouncementFragment();
-                return announcementFragment;
-
-            case 3:
-                MypageFragment mypageFragment = new MypageFragment();
-                return mypageFragment;
-
-            default:
-                return null;
-        }
+    public Fragment createFragment(int position) {
+        if(position == 0) return SearchRestaurantFragment.newInstance();
+        else if(position == 1) return DiscountFragment.newInstance();
+        else if(position == 2) return AnnouncementFragment.newInstance();
+        else return MypageFragment.newInstance();
     }
 
     @Override
-    public int getCount() {
+    public int getItemCount() {
         return mTabCount;
     }
 }

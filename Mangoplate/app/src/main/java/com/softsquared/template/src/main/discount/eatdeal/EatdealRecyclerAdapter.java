@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.softsquared.template.R;
+import com.softsquared.template.src.main.MainActivity;
 import com.softsquared.template.src.main.discount.eatdeal.models.EatdealInfo;
 import com.softsquared.template.src.main.search_restaurant.SearchRestaurantRecyclerAdapter;
 import com.softsquared.template.src.main.search_restaurant.models.SearchRestaurantInfo;
@@ -23,10 +24,11 @@ public class EatdealRecyclerAdapter extends RecyclerView.Adapter<EatdealRecycler
     private ArrayList<EatdealInfo> eatdealInfoArrayList = new ArrayList<>();
 
     EatdealFragment eatdealFragment;
+    private MainActivity mainActivity;
 
-    public EatdealRecyclerAdapter(EatdealFragment eatdealFragment)
+    public EatdealRecyclerAdapter(MainActivity mainActivity)
     {
-        this.eatdealFragment = eatdealFragment;
+        this.mainActivity = mainActivity;
     }
 
     @NonNull

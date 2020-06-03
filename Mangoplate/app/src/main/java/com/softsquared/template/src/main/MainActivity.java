@@ -1,23 +1,19 @@
 package com.softsquared.template.src.main;
 
 import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.graphics.Point;
 import android.os.Bundle;
-import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
 import android.view.animation.RotateAnimation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationMenu;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.softsquared.template.R;
@@ -26,13 +22,11 @@ import com.softsquared.template.src.main.interfaces.MainActivityView;
 import com.softsquared.template.src.main.models.UserInfo;
 import com.softsquared.template.src.main.search_restaurant.SearchRestaurantFragment;
 
-import java.security.MessageDigest;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 import it.sephiroth.android.library.viewrevealanimator.ViewRevealAnimator;
 
 import static com.softsquared.template.src.ApplicationClass.TAG;
@@ -50,7 +44,7 @@ public class MainActivity extends BaseActivity implements MainActivityView {
 //    MypageFragment mypageFragment = new MypageFragment();
     MainContentsAdapter mainContentsAdapter;
     ViewRevealAnimator viewRevealAnimator;
-    ViewPager mViewPager;
+    public ViewPager2 mainViewpager;
     FloatingActionButton floatingActionButton, floatingActionCloseButton;
     Animation fadeIn, fadeOut,rise, rotation;
 
@@ -67,71 +61,50 @@ public class MainActivity extends BaseActivity implements MainActivityView {
         mBottomNavigationView();
         animationSetting();
         floatinAnim();
+        setViwewPager();
 
     }
+
+    public void setViwewPager()
+    {
+
+        mainViewpager = findViewById(R.id.viewPager);
+        mainContentsAdapter = new MainContentsAdapter(this, 4);
+        mainViewpager.setAdapter(mainContentsAdapter);
+
+        mainViewpager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                if(position == 0) bottomNavigationView.setSelectedItemId(R.id.search);
+                else if(position == 1) bottomNavigationView.setSelectedItemId(R.id.discount);
+                else if(position == 2) bottomNavigationView.setSelectedItemId(R.id.notice);
+                else if(position == 3) bottomNavigationView.setSelectedItemId(R.id.myprofile);
+            }
+        });
+    }
+
 
     public void mBottomNavigationView()
     {
         bottomNavigationView = findViewById(R.id.bottom_navigation_view);
-        mViewPager = findViewById(R.id.viewPager);
-        mainContentsAdapter = new MainContentsAdapter(getSupportFragmentManager(), 4);
-        mViewPager.setAdapter(mainContentsAdapter);
         floatingActionCloseButton = findViewById(R.id.middle_floating_action_close_button);
 
-        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                if(prevMenuItem != null)
-                    prevMenuItem.setChecked(false);
-                else
-                    bottomNavigationView.getMenu().getItem(0).setChecked(false);
-
-                bottomNavigationView.getMenu().getItem(position).setChecked(true);
-                prevMenuItem = bottomNavigationView.getMenu().getItem(position);
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.search: {
-                        mViewPager.setCurrentItem(0);
+                        mainViewpager.setCurrentItem(0);
                         break;
                     }
                     case R.id.discount:{
-                        mViewPager.setCurrentItem(1);
+                        mainViewpager.setCurrentItem(1);
                         break;
                     }
                     case R.id.plus_btn:
                     {
-//                        AnimationSet appearAnimation = new AnimationSet(true);
-//                        appearAnimation.addAnimation(fadeIn);
-//                        appearAnimation.addAnimation(rise);
-//
-//                        floatingActionButton.startAnimation(fadeOut);
-//                        floatingActionCloseButton.startAnimation(appearAnimation);
-//
-//
-//                        floating_eat_deal.startAnimation(appearAnimation);
-//                        floating_eat_deal_img.startAnimation(appearAnimation);
-//                        floating_gone.startAnimation(appearAnimation);
-//                        floating_gone_img.startAnimation(appearAnimation);
-//                        floating_register_res.startAnimation(appearAnimation);
-//                        floating_register_res_img.startAnimation(appearAnimation);
-//                        floating_review.startAnimation(appearAnimation);
-//                        floating_review_img.startAnimation(appearAnimation);
 
                         floatingActionButton = findViewById(R.id.middle_floating_action_button);
                         viewRevealAnimator = findViewById(R.id.animator);
@@ -140,14 +113,13 @@ public class MainActivity extends BaseActivity implements MainActivityView {
 
                         floatingClose();
 
-
                     }
                     case R.id.notice:{
-                        mViewPager.setCurrentItem(2);
+                        mainViewpager.setCurrentItem(2);
                         break;
                     }
                     case R.id.myprofile: {
-                        mViewPager.setCurrentItem(3);
+                        mainViewpager.setCurrentItem(3);
                         break;
                     }
                 }

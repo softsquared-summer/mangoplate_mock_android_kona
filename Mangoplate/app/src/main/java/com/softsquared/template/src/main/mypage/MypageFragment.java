@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.softsquared.template.R;
+import com.softsquared.template.src.main.search_restaurant.SearchRestaurantFragment;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,8 +21,9 @@ public class MypageFragment extends Fragment {
 
 
 
-    public MypageFragment()
+    public static MypageFragment newInstance()
     {
+        return new MypageFragment();
     }
 
     @Nullable

@@ -8,6 +8,7 @@ import android.widget.TableLayout;
 
 import com.google.android.material.tabs.TabLayout;
 import com.softsquared.template.R;
+import com.softsquared.template.src.main.search_restaurant.SearchRestaurantFragment;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,7 +21,9 @@ public class DiscountFragment extends Fragment {
     DiscountViewpagerAdapter discountViewpagerAdapter;
 
 
-    public DiscountFragment() {
+    public static DiscountFragment newInstance()
+    {
+        return new DiscountFragment();
     }
 
     @Nullable

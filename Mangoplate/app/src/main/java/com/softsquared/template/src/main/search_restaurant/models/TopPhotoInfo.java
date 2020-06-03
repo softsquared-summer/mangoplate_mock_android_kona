@@ -4,6 +4,26 @@ import com.google.gson.annotations.SerializedName;
 
 public class TopPhotoInfo {
 
+    public int getEventId() {
+        return eventId;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
     @SerializedName("eventId")
     private int eventId;
 

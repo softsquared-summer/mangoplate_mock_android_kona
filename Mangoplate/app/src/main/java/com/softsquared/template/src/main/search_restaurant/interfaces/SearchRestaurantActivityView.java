@@ -15,7 +15,7 @@ public interface SearchRestaurantActivityView {
     void GetTopPhotoOnFailure();
 
 
-    void GetSearchRestaurantOnSuccess(SearchRestaurantResponse searchRestaurantResponse);
+    void GetSearchRestaurantOnSuccess(ArrayList<SearchRestaurantInfo> restaurantInfos);
 
     void GetSearchRestaurantOnFailure();
 }

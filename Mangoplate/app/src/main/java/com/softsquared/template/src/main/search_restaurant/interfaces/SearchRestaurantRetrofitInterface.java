@@ -20,12 +20,17 @@ public interface SearchRestaurantRetrofitInterface {
 
     @GET("/restaurants")
     Call<SearchRestaurantResponse> getSearchRestaurant(
-            @Header("x-access-token") String accesstoken,
             @Query("lat") float lat,
             @Query("lng") float lng,
             @Query("type") String type,
-            @Query("area") String area
-
+            @Query("area") String area,
+            @Query("order") String order,
+            @Query("category") String category,
+            @Query("price") String price,
+            @Query("parking") String parking,
+            @Query("radius") String radius,
+            @Query("page") String page,
+            @Query("size") String size
     );
 
 }

@@ -30,8 +30,8 @@ public class RestaurantDetailTopPhotoAdapter extends RecyclerView.Adapter<Restau
     }
 
     @Override
-    public int getItemCount() {
-        return Math.min(topPhotoInfoArrayList.size(), 5);
+    public int getItemCount(){
+        return topPhotoInfoArrayList.size();
     }
 
     public void add(RestaurantDetailTopPhotoInfo info)

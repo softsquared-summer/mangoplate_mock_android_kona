@@ -12,7 +12,7 @@ public class EatdealResponse {
 
 
     @SerializedName("result")
-    private ArrayList<EatdealInfo> result;
+    private ArrayList<EatdealInfo> result = null;
 
     @SerializedName("code")
     private int code;

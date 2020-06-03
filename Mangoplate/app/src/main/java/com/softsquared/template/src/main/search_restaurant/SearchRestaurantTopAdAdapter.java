@@ -1,7 +1,7 @@
 package com.softsquared.template.src.main.search_restaurant;
 
 import android.content.Context;
-import android.text.Layout;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,12 +9,17 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.softsquared.template.R;
+import com.softsquared.template.src.main.MainActivity;
+import com.softsquared.template.src.main.search_restaurant.models.TopPhotoInfo;
+
+import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
 
-public class SearchRestaurantTopAdAdapter extends PagerAdapter {
-
+public class SearchRestaurantTopAdAdapter extends RecyclerView.Adapter<SearchRestaurantTopAdAdapter.AdViewHolder> {
+/*
     private Context mContext = null;
 
     public static final int dining_week = 0;
@@ -83,4 +88,56 @@ public class SearchRestaurantTopAdAdapter extends PagerAdapter {
     public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
         return (view == (View)object);
     }
+
+ */
+private ArrayList<TopPhotoInfo> topPhotoInfoArrayList = new ArrayList<>();
+
+    @NonNull
+    @Override
+    public AdViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.search_restaurant_ad_viewpager, parent, false);
+        return new AdViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull AdViewHolder holder, int position) {
+        holder.bind(topPhotoInfoArrayList.get(position));
+    }
+
+    public void add(TopPhotoInfo topPhotoInfo) {
+        topPhotoInfoArrayList.add(topPhotoInfo);
+    }
+
+    @Override
+    public int getItemCount() {
+        return topPhotoInfoArrayList.size();
+    }
+
+
+    class AdViewHolder extends RecyclerView.ViewHolder {
+        ImageView topPhoto;
+
+        AdViewHolder(@NonNull View itemView) {
+            super(itemView);
+            topPhoto = itemView.findViewById(R.id.ad_imageView);
+        }
+
+        void bind(TopPhotoInfo topPhotoInfo) {
+            Glide.with(itemView.getContext())
+                    .load(topPhotoInfo.getImageUrl())
+                    .into(topPhoto);
+
+            /*itemView.setOnTouchListener((v, event) -> {
+                Context context = v.getContext();
+                if (context instanceof MainActivity) {
+                    MainActivity mainActivity = (MainActivity) context;
+                    mainActivity.mViewPager.setUserInputEnabled(false);
+                }
+                v.performClick();
+                return false;
+            });*/
+        }
+    }
 }
+
